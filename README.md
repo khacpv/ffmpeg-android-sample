@@ -3,6 +3,7 @@ FFMPEG for android tutorial
 
 #### Sample Video Editor use ffmpeg library, NDK
 this project bases on https://github.com/roman10/android-ffmpeg-tutorial
+
 also see: http://kimdata.cafe24.com/wp/category/com/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/
 
 #### install ffmpeg library:
