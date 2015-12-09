@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+project.ext.set("MODULE_NAME", 'VideoEditor')   // libVideoEditor.so
+project.ext.set("NDK_LIBS_SRC", 'src/main/jni') // source code folder
+project.ext.set("NDK_LIBS_OUT", '../jniLibs')   // .so libs folder
+project.ext.set("NDK_LIBS_INCLUDE", 'src/main/libs/native') // include .so to NDK_LIBS_OUT folder
+
+def ndkDir = android.ndkDirectory
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.oic.videoeditor"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            moduleName project.MODULE_NAME
+            ldLibs "log"
+            cFlags "" // to pass argument to auto-generated Android.mk file
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                debuggable = true
+            }
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable = true
+            jniDebuggable = true
+        }
+        jnidebug {
+            initWith(buildTypes.debug)
+            jniDebuggable true
+        }
+    }
+
+    sourceSets.main {
+        jni{
+            srcDirs = []    // disable auto-generated Android.mk file
+        }
+    }
+
+    task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+        println '===============starting build native libs into jniLibs folder'
+        commandLine "$ndkDir/ndk-build",
+                '-C', file(project.NDK_LIBS_SRC).absolutePath,
+                '-j', Runtime.runtime.availableProcessors(),
+                'NDK_LIBS_OUT='+project.NDK_LIBS_OUT,
+                'all',
+                'NDK_DEBUG=1'
+    }
+
+    task copyNativeLibsArm(type: Copy){
+        println '===============copy native libs into armeabi'
+        from file(project.NDK_LIBS_INCLUDE).absolutePath
+        into file('src/main/jniLibs/armeabi').absolutePath
+    }
+
+    task copyNativeLibsArmV7a(type: Copy){
+        println '===============copy native libs into armeabi-v7a'
+        from file(project.NDK_LIBS_INCLUDE).absolutePath
+        into file('src/main/jniLibs/armeabi-v7a').absolutePath
+    }
+
+    task cleanNative(type: Exec, description: 'Clean JNI object files') {
+        println '===============clean .obj folder'
+        commandLine "$ndkDir/ndk-build",
+                '-C', file(project.NDK_LIBS_SRC).absolutePath,
+                'clean'
+    }
+
+    clean.dependsOn cleanNative
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn buildNative, copyNativeLibsArm,copyNativeLibsArmV7a
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
+}
