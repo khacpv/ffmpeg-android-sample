@@ -7,14 +7,14 @@ this project bases on https://github.com/roman10/android-ffmpeg-tutorial
 #### install ffmpeg library:
 http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/
 
-change ffmpeg-version/configure
+change ffmpeg-{version}/.configure
 ````
 -z, noexecstack
 to
 -z noexecstack
 ````
 
-build_android.sh
+build_android.sh (MACOS only)
 ````
 #!/bin/bash
 NDK=$HOME/Development/android-ndk-r10e
