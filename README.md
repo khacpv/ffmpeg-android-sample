@@ -8,6 +8,7 @@ this project bases on https://github.com/roman10/android-ffmpeg-tutorial
 http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/
 
 to run specific tutorial2:
+
 file: app/src/main/jni/Android.mk
 ````
 LOCAL_SRC_FILES := tutorial01.c
@@ -16,8 +17,10 @@ LOCAL_SRC_FILES := tutorial02.c
 ````
 
 file: Mainifest.xml
+````
 android:name=".MainActivity"
 to 
 android:name=".tutorial02.MainActivity"
+````
 
 make & build project
