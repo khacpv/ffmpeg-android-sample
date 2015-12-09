@@ -222,10 +222,15 @@ void decodeAndRender(JNIEnv *pEnv) {
 					LOGE("cannot lock window");
 				} else {
 					// draw the frame on buffer
-					LOGI("copy buffer %d:%d:%d", width, height, width*height*4);
+					LOGI("copy buffer %d:%d:%d", width, height, width * height * 4);
 					LOGI("window buffer: %d:%d:%d", windowBuffer.width,
-							windowBuffer.height, windowBuffer.stride);
-					memcpy(windowBuffer.bits, buffer,  width * height * 4);
+						 windowBuffer.height, windowBuffer.stride);
+//					memcpy(windowBuffer.bits, buffer,  width * height * 4);
+					for (int h = 0; h < height; h++) {
+						memcpy(windowBuffer.bits + h * windowBuffer.stride,
+							   buffer + h * frameRGBA->linesize[0],
+							   width*4);
+					}
 					// unlock the window buffer and post it to display
 					ANativeWindow_unlockAndPost(window);
 					// count number of frames

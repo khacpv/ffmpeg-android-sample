@@ -29,9 +29,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
             + File.separator + "oic-videoeditor";
 
     // video used to fill the width of the screen
-    private static final String videoFileName = "promo.mp4";  	//640x360
+//    private static final String videoFileName = "1.mp4";  	//640x360
     // video used to fill the height of the screen
-//	private static final String videoFileName = "12.mp4";   //200x640
+	private static final String videoFileName = "12.mp4";   //200x640
 
     private SurfaceView mSurfaceView;
 
