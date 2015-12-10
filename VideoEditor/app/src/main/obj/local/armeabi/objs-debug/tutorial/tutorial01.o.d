@@ -1,5 +1,5 @@
-/Users/khacpham/Downloads/VideoEditor/app/src/main/obj/local/armeabi/objs-debug/tutorial/tutorial01.o: \
- /Users/khacpham/Downloads/VideoEditor/app/src/main/jni/tutorial01.c \
+/Users/khacpham/Workspaces/github_workspace/ffmpeg-android-sample/VideoEditor/app/src/main/obj/local/armeabi/objs-debug/tutorial/tutorial01.o: \
+ /Users/khacpham/Workspaces/github_workspace/ffmpeg-android-sample/VideoEditor/app/src/main/jni/tutorial01.c \
  /Users/khacpham/Development/android-ndk-r10e/sources/ffmpeg-2.8.3/android/arm/include/libavcodec/avcodec.h \
  /Users/khacpham/Development/android-ndk-r10e/platforms/android-9/arch-arm/usr/include/errno.h \
  /Users/khacpham/Development/android-ndk-r10e/platforms/android-9/arch-arm/usr/include/sys/cdefs.h \

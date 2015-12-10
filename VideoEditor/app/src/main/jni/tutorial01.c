@@ -25,9 +25,12 @@
 #include <android/bitmap.h>
 
 #define LOG_TAG "oic-videoeditor"
-#define LOGI(...) __android_log_print(4, LOG_TAG, __VA_ARGS__);
-#define LOGE(...) __android_log_print(6, LOG_TAG, __VA_ARGS__);
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__);
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__);
 
+/**
+ *
+ * */
 void SaveFrame(JNIEnv *pEnv, jobject pObj, jobject pBitmap, int width, int height, int iFrame) {
 	char szFilename[200];
 	jmethodID sSaveFrameMID;
@@ -71,7 +74,7 @@ jobject createBitmap(JNIEnv *pEnv, int pWidth, int pHeight) {
 }
 
 /**
- * generate frame from video
+ * generate frames from video
  * @param pMainAct: Activity
  * @param pFileName: video file path
  * @param pNumOfFrames: number frame to extract
