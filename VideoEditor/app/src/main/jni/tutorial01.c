@@ -96,6 +96,7 @@ jint naMain(JNIEnv *pEnv, jobject pObj, jobject pMainAct, jstring pFileName, jin
 	char *videoFileName;
 
 	// Register all formats and codecs
+    // Initialize libavformat and register all the muxers, demuxers and protocols.
 	av_register_all();
 
 	//get C string from JNI jstring
